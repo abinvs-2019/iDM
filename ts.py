@@ -3,7 +3,10 @@ import os
 import subprocess
 
 def download_file(url, filename):
-    response = requests.get(url, stream=True)
+    response = requests.get(url, stream=True,headers={   
+    'User-Agent': 'Mozilla/5.0',  # Example User-Agent header
+    'Authorization': 'Bearer YOUR_TOKEN', 
+    })
     with open(filename, 'wb') as file:
         for chunk in response.iter_content(chunk_size=8192):
             file.write(chunk)
@@ -24,7 +27,6 @@ def download_video(manifest_url):
     # Download the TS segments
     for i, ts_url in enumerate(ts_urls):
         download_file(ts_url, f'segments/segment_{i}.ts')
-    concatenate_segments(output_filename)
     print(f'Downloaded {len(ts_urls)} segments.')
 
 def concatenate_segments(output_filename):
@@ -46,4 +48,5 @@ if __name__ == "__main__":
     output_filename = 'file_out.mp4'
     
     download_video(manifest_url)
+    concatenate_segments(output_filename)
 
