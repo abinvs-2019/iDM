@@ -7,7 +7,7 @@ iDM is a Download manager tool written in pyhton( Internet Download manager)
 git clone 
 
 ```bash
-git clone URL
+git clone https://github.com/abinvs-2019/iDM.git
 ```
 
 ## Usage
